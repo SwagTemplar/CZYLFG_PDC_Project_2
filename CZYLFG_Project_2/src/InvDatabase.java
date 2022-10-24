@@ -8,15 +8,21 @@ import java.sql.DriverManager;
  */
 public class InvDatabase {
 
-    Connection conn = null;
-    String url = "jdbc:derby:InvSysDB_ebd;create=true";
-    String dbUserName = "inv";
-    String dbPassword = "inv";
+    private Connection conn = null;
+    private static final String url = "jdbc:derby:InvSysDB_ebd;create=true";
+    private static final String dbUserName = "inv";
+    private static final String dbPassword = "inv";
 
-    public void dbConnect() {
+    public InvDatabase()
+    {
+        dbConnect();
+    }
+    
+    
+    private void dbConnect() {
         try {
-
             conn = DriverManager.getConnection(url, dbUserName, dbPassword);
+            System.out.println("Database Connected");
         } catch (Throwable e) {
             System.out.println("error");
         }
