@@ -7,21 +7,29 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /*
  * @author Connor Stewart 17982915
  */
 public class InvView extends JFrame {
 
-    private JPanel userPanel = new JPanel(new GridBagLayout());
+    private JPanel viewerPanel = new JPanel(new GridBagLayout());
+    private JPanel loginPanel = new JPanel();
     private JButton vCuInv = new JButton("View current inventory");
     private JButton crOrd = new JButton("Create new order");
     private JButton vCuOrd = new JButton("View current orders");
     private JButton logOut = new JButton("Logout");
     private JTextArea fileView = new JTextArea();
+    private JButton logIn = new JButton("Login");
+    public JTextField usernameInput = new JTextField(20);
+    public JTextField passwordInput = new JTextField(20);
+    private JLabel username = new JLabel("Username: ");
+    private JLabel password = new JLabel("Password: ");
 
     GridBagConstraints gBC = new GridBagConstraints();
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -34,25 +42,59 @@ public class InvView extends JFrame {
         this.setLocationRelativeTo(null);
 
         gBC.insets = new Insets(10, 10, 10, 10);
-        gBC.gridx = 0;
+
+        gBC.gridx = 1;
         gBC.gridy = 1;
-        this.userPanel.add(vCuInv, gBC);
+        this.loginPanel.add(username, gBC);
+
+        gBC.gridx = 2;
+        gBC.gridy = 1;
+        this.loginPanel.add(usernameInput, gBC);
+
+        gBC.gridx = 3;
+        gBC.gridy = 1;
+        this.loginPanel.add(password, gBC);
+
+        gBC.gridx = 4;
+        gBC.gridy = 1;
+        this.loginPanel.add(passwordInput, gBC);
+
         gBC.gridx = 0;
         gBC.gridy = 2;
-        this.userPanel.add(vCuOrd, gBC);
+        this.loginPanel.add(logIn, gBC);
+
+        this.add(loginPanel, BorderLayout.EAST);
+        this.add(loginPanel);
+        this.setVisible(true);
+    }
+
+    public void Viewer() {
+
+        gBC.insets = new Insets(10, 10, 10, 10);
+        gBC.gridx = 0;
+        gBC.gridy = 1;
+        this.viewerPanel.add(vCuInv, gBC);
+        gBC.gridx = 0;
+        gBC.gridy = 2;
+        this.viewerPanel.add(vCuOrd, gBC);
         gBC.gridx = 0;
         gBC.gridy = 3;
-        this.userPanel.add(crOrd, gBC);
+        this.viewerPanel.add(crOrd, gBC);
         gBC.gridx = 0;
         gBC.gridy = 4;
-        this.userPanel.add(logOut, gBC);
+        this.viewerPanel.add(logOut, gBC);
 
+        this.getContentPane().removeAll();
         this.add(new JScrollPane(fileView));
-        this.add(userPanel, BorderLayout.EAST);
-        this.setVisible(true);
+        this.add(viewerPanel, BorderLayout.EAST);
+        viewerPanel.setVisible(true);
+        this.add(viewerPanel);
+        this.revalidate();
+        this.repaint();
     }
 
     public static void main(String[] args) {
         InvView view = new InvView();
+
     }
 }
