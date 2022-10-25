@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -101,5 +102,9 @@ public class InvView extends JFrame {
     public static void main(String[] args) {
         InvView view = new InvView();
 
+    }
+
+    void addActionListener(ActionListener listener) {
+        this.logIn.addActionListener(listener);
     }
 }
