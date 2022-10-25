@@ -4,6 +4,6 @@
  */
 public class dbTestMain {
     public static void main(String[] args){
-        InvDatabase db = new InvDatabase();
+        InvDBManager db = new InvDBManager();
     }
 }
