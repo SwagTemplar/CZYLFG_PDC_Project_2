@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 public class InvView extends JFrame {
 
     private JPanel viewerPanel = new JPanel(new GridBagLayout());
-    private JPanel loginPanel = new JPanel();
+    private JPanel loginPanel = new JPanel(new GridBagLayout());
     private JButton vCuInv = new JButton("View current inventory");
     private JButton crOrd = new JButton("Create new order");
     private JButton vCuOrd = new JButton("View current orders");
@@ -31,7 +31,6 @@ public class InvView extends JFrame {
     private JLabel username = new JLabel("Username: ");
     private JLabel password = new JLabel("Password: ");
 
-    GridBagConstraints gBC = new GridBagConstraints();
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     public InvView() {
@@ -41,35 +40,41 @@ public class InvView extends JFrame {
         this.setSize(userScreenWidth, userScreenHeight);
         this.setLocationRelativeTo(null);
 
+        GridBagConstraints gBC = new GridBagConstraints();
         gBC.insets = new Insets(10, 10, 10, 10);
 
-        gBC.gridx = 1;
-        gBC.gridy = 1;
+        gBC.anchor = GridBagConstraints.CENTER;
+        gBC.gridx = 0;
+        gBC.gridy = 0;
         this.loginPanel.add(username, gBC);
 
-        gBC.gridx = 2;
-        gBC.gridy = 1;
+        gBC.anchor = GridBagConstraints.CENTER;
+        gBC.gridx = 1;
+        gBC.gridy = 0;
         this.loginPanel.add(usernameInput, gBC);
 
-        gBC.gridx = 3;
-        gBC.gridy = 1;
+        gBC.anchor = GridBagConstraints.CENTER;
+        gBC.gridx = 2;
+        gBC.gridy = 0;
         this.loginPanel.add(password, gBC);
 
-        gBC.gridx = 4;
-        gBC.gridy = 1;
+        gBC.anchor = GridBagConstraints.CENTER;
+        gBC.gridx = 3;
+        gBC.gridy = 0;
         this.loginPanel.add(passwordInput, gBC);
 
-        gBC.gridx = 0;
-        gBC.gridy = 2;
+        gBC.anchor = GridBagConstraints.CENTER;
+        gBC.gridx = 4;
+        gBC.gridy = 0;
         this.loginPanel.add(logIn, gBC);
 
-        this.add(loginPanel, BorderLayout.EAST);
         this.add(loginPanel);
         this.setVisible(true);
     }
 
     public void Viewer() {
 
+        GridBagConstraints gBC = new GridBagConstraints();
         gBC.insets = new Insets(10, 10, 10, 10);
         gBC.gridx = 0;
         gBC.gridy = 1;
