@@ -1,17 +1,24 @@
 
+import java.util.Observable;
 
 /*
  * @author Connor Stewart 17982915
  */
-public class InvModel {
+public class InvModel extends Observable{
 
-    public String username;
-//    public Database db;
-//    public Data data;
+    private InvDBManager db;
+    private User user;
 
-    void checkLogin(String username, String password) {
-        this.username = username;
-//      this.data = this.db.checkName(username, password);
+    public InvModel(){
+        db = new InvDBManager();
+    }
+    
+    
+    public void validateUser(String username, String password) {
+        
+        user = db.checkLogin(username, password);
+        
+        this.notifyObservers(this.user);
     }
 
 }
