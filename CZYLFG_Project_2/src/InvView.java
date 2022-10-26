@@ -6,6 +6,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,7 +19,7 @@ import javax.swing.JTextField;
 /*
  * @author Connor Stewart 17982915
  */
-public class InvView extends JFrame {
+public class InvView extends JFrame implements Observer{
 
     private JPanel viewerPanel = new JPanel(new GridBagLayout());
     private JPanel loginPanel = new JPanel(new GridBagLayout());
@@ -106,5 +108,15 @@ public class InvView extends JFrame {
 
     void addActionListener(ActionListener listener) {
         this.logIn.addActionListener(listener);
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        User user = (User) arg;
+        
+        if(user.loginFlag)
+        {
+            this.Viewer();
+        }
     }
 }

@@ -23,7 +23,7 @@ public class InvController implements ActionListener {
             case "Log in":
                 String username = this.InvView.usernameInput.getText();
                 String password = this.InvView.passwordInput.getText();
-                this.InvModel.checkLogin(username, password);
+                this.InvModel.validateUser(username, password);
                 break;
         }
     }
