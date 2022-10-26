@@ -1,13 +1,16 @@
+Wed Oct 26 22:32:55 NZDT 2022 : Apache Derby Network Server - 10.14.2.0 - (1828579) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Tue Oct 25 23:24:53 NZDT 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0184-0eac-7343-00000f8a6b88 
-on database directory D:\CZYLFG_PDC_Project_2\CZYLFG_Project_2\InvSysDB_ebd with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@659e0bfd 
-Loaded from file:/D:/CZYLFG_PDC_Project_2/CZYLFG_Project_2/lib/derby.jar
+Wed Oct 26 22:32:55 NZDT 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0184-13a3-391f-00004bda27e6 
+on database directory D:\CZYLFG_PDC_Project_2\CZYLFG_Project_2\InvSysDB_ebd with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@73d16e93 
+Loaded from file:/D:/CZYLFG_PDC_Project_2/CZYLFG_Project_2/db-derby-10.14.2.0-bin/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=17.0.2+8-LTS-86
-user.dir=D:\CZYLFG_PDC_Project_2\CZYLFG_Project_2
+user.dir=D:\CZYLFG_PDC_Project_2\CZYLFG_Project_2\db-derby-10.14.2.0-bin
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0
-derby.system.home=null
+derby.system.home=D:\CZYLFG_PDC_Project_2\CZYLFG_Project_2
 Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Wed Oct 26 22:33:15 NZDT 2022: Shutting down Derby engine
