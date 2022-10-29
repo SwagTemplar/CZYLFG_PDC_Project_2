@@ -12,7 +12,6 @@ import java.sql.Statement;
 public class InvDBManager {
 
     private InvDatabaseConnect invDBConnect;
-    private Statement sql;
     private Connection conn;
 
     public InvDBManager() {
@@ -25,11 +24,8 @@ public class InvDBManager {
     private void createTables() {
         if (!checkTableExist("LOGINDETAILS")) {
             databaseUpdate("CREATE TABLE LOGINDETAILS(USERID INT, USERNAME VARCHAR(30), PASSWORD VARCHAR(30))");
-            databaseQuery("INSERT INTO LOGINDETAILS VALUES(1, kisoon, leaf)");
-            databaseQuery("INSERT INTO LOGINDETAILS VALUES(2, kisoon, general)");
-            databaseQuery("INSERT INTO LOGINDETAILS VALUES(3, connor, conzey)");
-            databaseQuery("INSERT INTO LOGINDETAILS VALUES(4, connor, stewart)");
-                
+            initialLogins();
+            
         }
         if (!checkTableExist("INVENTORYSTOCK")) {
             databaseUpdate("CREATE TABLE INVENTORYSTOCK(FRUITID INT, FRUITNAME VARCHAR(40), FRUITQUANTITY INT)");
@@ -37,6 +33,16 @@ public class InvDBManager {
         if (!checkTableExist("ORDERS")) {
             databaseUpdate("CREATE TABLE ORDERS(ORDERID INT, FRUITID INT, QUANTITYORDERED INT, USERID INT)");
         }
+       
+    }
+    
+    //The initial login details
+    private void initialLogins()
+    {
+        databaseUpdate("INSERT INTO LOGINDETAILS VALUES(1, 'kisoon', 'leaf')");
+        databaseUpdate("INSERT INTO LOGINDETAILS VALUES(2, 'kisoon', 'general')");
+        databaseUpdate("INSERT INTO LOGINDETAILS VALUES(3, 'connor', 'conzey')");
+        databaseUpdate("INSERT INTO LOGINDETAILS VALUES(4, 'connor', 'stewart')");
     }
 
     //Check if the tables exist
@@ -59,13 +65,11 @@ public class InvDBManager {
         return exists;
     }
 
-    //Method that helps in creating the tables
+    //Method that helps in creating the tables and populate them
     private void databaseUpdate(String statement) {
         try {
-            sql = conn.createStatement();
-            sql.addBatch(statement);
-            sql.executeBatch();
-
+            Statement sql = conn.createStatement();
+            sql.executeUpdate(statement);
         } catch (SQLException ex) {
             System.out.println("Database update failed");
         }
@@ -75,7 +79,7 @@ public class InvDBManager {
     private ResultSet databaseQuery(String statement) {
         ResultSet queryResult = null;
         try {
-            sql = conn.createStatement();
+            Statement sql = conn.createStatement();
             queryResult = sql.executeQuery(statement);
         } catch (SQLException ex) {
             System.out.println("Invalid SQL command");
@@ -99,6 +103,8 @@ public class InvDBManager {
                 {
                     user.loginFlag = true;
                     user.userID = loginSearch.getInt("USERID");
+                    System.out.println("Login = true");
+                    System.out.println(""+loginSearch.getInt("USERID"));
                 }
             }
         }catch(SQLException ex)
