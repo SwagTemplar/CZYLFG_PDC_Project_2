@@ -20,7 +20,7 @@ public class InvController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String check = e.getActionCommand();
         switch (check) {
-            case "Log in":
+            case "Login":
                 String username = this.InvView.usernameInput.getText();
                 String password = this.InvView.passwordInput.getText();
                 this.InvModel.validateUser(username, password);
