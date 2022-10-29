@@ -25,7 +25,7 @@ public class InvDBManager {
         if (!checkTableExist("LOGINDETAILS")) {
             databaseUpdate("CREATE TABLE LOGINDETAILS(USERID INT, USERNAME VARCHAR(30), PASSWORD VARCHAR(30))");
             initialLogins();
-            
+
         }
         if (!checkTableExist("INVENTORYSTOCK")) {
             databaseUpdate("CREATE TABLE INVENTORYSTOCK(FRUITID INT, FRUITNAME VARCHAR(40), FRUITQUANTITY INT)");
@@ -33,12 +33,11 @@ public class InvDBManager {
         if (!checkTableExist("ORDERS")) {
             databaseUpdate("CREATE TABLE ORDERS(ORDERID INT, FRUITID INT, QUANTITYORDERED INT, USERID INT)");
         }
-       
+
     }
-    
+
     //The initial login details
-    private void initialLogins()
-    {
+    private void initialLogins() {
         databaseUpdate("INSERT INTO LOGINDETAILS VALUES(1, 'kisoon', 'leaf')");
         databaseUpdate("INSERT INTO LOGINDETAILS VALUES(2, 'kisoon', 'general')");
         databaseUpdate("INSERT INTO LOGINDETAILS VALUES(3, 'connor', 'conzey')");
@@ -86,32 +85,44 @@ public class InvDBManager {
         }
         return queryResult;
     }
-    
+
     //Checks if the login details of the user exist.
-    public User checkLogin(String username, String password)
-    {
+    public User checkLogin(String username, String password) {
         User user = new User();
-        
-        try{
-            ResultSet loginSearch = databaseQuery("SELECT USERNAME, PASSWORD FROM LOGINDETAILS WHERE USERNAME = '"+ username +"'");
-            
-            if(loginSearch.next())
-            {
-                String pw = loginSearch.getString("PASSWORD");
-                
-                if(password.compareTo(pw) == 0)
-                {
-                    user.loginFlag = true;
-                    user.userID = loginSearch.getInt("USERID");
-                    System.out.println("Login = true");
-                    System.out.println(""+loginSearch.getInt("USERID"));
+
+        try {
+            ResultSet loginSearch = databaseQuery("SELECT * FROM LOGINDETAILS WHERE USERNAME = '" + username + "'");
+
+            if (loginSearch != null) {
+                while (loginSearch.next()) {
+                    String pw = loginSearch.getString("PASSWORD");
+                    System.out.println("***" + pw);
+                    System.out.println("found user");
+
+                    if (password.compareTo(pw) == 0) {
+                        user.loginFlag = true;
+                        user.userID = loginSearch.getInt("USERID");
+                        System.out.println("Login = true");
+                        System.out.println("" + loginSearch.getInt("USERID"));
+                    } else {
+                        System.out.println("User not found");
+                    }
                 }
             }
-        }catch(SQLException ex)
-        {
-            System.out.println("No such user exists");
+
+        } catch (SQLException ex) {
+            System.out.println("Search error");
         }
-        
+
         return user;
     }
+//    public User checkLogin(String username, String password){
+//         User user = new User();
+//         
+//         user.loginFlag = true;
+//         
+//         return user;
+//    }
+    
+    
 }
