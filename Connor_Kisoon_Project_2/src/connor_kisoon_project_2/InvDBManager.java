@@ -129,4 +129,32 @@ public class InvDBManager {
         databaseUpdate("INSERT INTO ORDERS VALUES("+order.getOrderID()+", "+order.getfruitID()+", "
                         +order.getorderQuant()+", "+order.getuserID()+")");
     }
+    
+    
+    //Get the orders of a particular user
+    public OrderList retrieveOrders(int userID){
+        OrderList ol = new OrderList();
+        
+        try{
+            ResultSet orderSearch = databaseQuery("SELECT * FROM ORDERS WHERE USERID = '" + userID + "'");
+            if(orderSearch != null)
+            {
+                while(orderSearch.next())
+                {
+                    int orderID = orderSearch.getInt("ORDERID");
+                    int fruitID = orderSearch.getInt("FRUITID");
+                    int quantity = orderSearch.getInt("QUANTITYORDERED");
+                    Order od = new Order(orderID, fruitID, quantity, userID);
+                    ol.add(od);
+                }
+            }else{
+                System.out.println("No orders");
+            }
+            
+        } catch (SQLException ex){
+            System.out.println("Searching Error");
+        }
+        
+        return ol;
+    }
 }
