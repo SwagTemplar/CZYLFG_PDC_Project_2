@@ -55,6 +55,7 @@ public class InvView extends JFrame implements Observer {
     // Creation of controllers
     public void createControllers(InvController controller) {
         getLoginPanel().getLogIn().addActionListener(controller);
+        getLoginPanel().getQuit().addActionListener(controller);
         getClientMenuPanel().getViewCurrentInventory().addActionListener(controller);
         getClientMenuPanel().getViewCurrentOrder().addActionListener(controller);
         getClientMenuPanel().getCreateOrder().addActionListener(controller);
