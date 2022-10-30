@@ -31,7 +31,7 @@ public class InventoryTest {
     }
 
     /**
-     * Test of stockCheck method, of class Inventory.
+     * Test of stockCheck method of class Inventory when there is a valid quantity.
      */
     @Test
     public void testStockCheckValidQuantity() {
@@ -47,7 +47,7 @@ public class InventoryTest {
     }
 
     /**
-     * Test of increaseInventory method, of class Inventory.
+     * Test of stockCheck method of class Inventory when there is a invalid positive quantity.
      */
     @Test
     public void testStockCheckInvalidPositiveQuantitiy() {
@@ -62,7 +62,9 @@ public class InventoryTest {
         assertEquals(expResult, result);
     }
     
-    
+    /**
+     * Test of stockCheck method of class Inventory when there is a invalid negative quantity.
+     */
     @Test
     public void testStockCheckInvalidNegativeQuantitiy() {
         System.out.println("Test invalid negative quantity");
@@ -76,6 +78,9 @@ public class InventoryTest {
         assertEquals(expResult, result);
     }
     
+    /**
+     * Test of stockCheck method of class Inventory when there is zero quantity.
+     */
     @Test
     public void testStockCheckZero() {
         System.out.println("Test zero quantity");
@@ -89,6 +94,9 @@ public class InventoryTest {
         assertEquals(expResult, result);
     }
     
+    /**
+     * Test of stockCheck method of class Inventory when there is one quantity.
+     */
     @Test
     public void testStockCheckOne() {
         System.out.println("Test one quantity");
@@ -102,6 +110,10 @@ public class InventoryTest {
         assertEquals(expResult, result);
     }
     
+    
+    /**
+     * Test of increaseInventory method of class Inventory when there is a invalid negative value.
+     */
     @Test
     public void increaseInventoryNegativeValue() {
         System.out.println("Test increase inventory negative value");
@@ -115,6 +127,9 @@ public class InventoryTest {
         assertEquals(expResult, instance.itemArr.get(0).getQuantityInStock());
     }
     
+    /**
+     * Test of increaseInventory method of class Inventory when there is a invalid large value.
+     */
     @Test
     public void increaseInventoryLargeValue() {
         System.out.println("Test increase inventory large value");
@@ -129,6 +144,10 @@ public class InventoryTest {
         }
     }
     
+    
+    /**
+     * Test of increaseInventory method of class Inventory when there is a zero value.
+     */
     @Test
     public void increaseInventoryZeroValue() {
         System.out.println("Test increase inventory by zero");
