@@ -60,6 +60,7 @@ public class InvController implements ActionListener {
         this.InvView.getClientMenuPanel().setVisible(true);
         this.InvView.getInventoryPanel().setVisible(false);
         this.InvView.getCreateOrderPanel().setVisible(false);
+        this.InvView.getViewOrdersPanel().setVisible(false);
         InvModel.updateObs();
     }
 
