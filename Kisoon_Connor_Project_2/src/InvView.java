@@ -10,13 +10,16 @@ import javax.swing.JFrame;
  */
 public class InvView extends JFrame implements Observer {
 
+    // Panels
     private LoginPanel loginPanel;
     private ClientMenuPanel clientMenuPanel;
     private InventoryPanel inventoryPanel;
     private CreateOrderPanel createOrderPanel;
-
+    
+    // Getting user screen size
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
+    
+    // Constructor
     public InvView() {
         int userScreenWidth = screenSize.width / 2;
         int userScreenHeight = screenSize.height / 2;
@@ -25,7 +28,7 @@ public class InvView extends JFrame implements Observer {
         components();
         visiblePanels();
     }
-
+    // Setting the frames up
     private void components() {
         this.loginPanel = new LoginPanel(this);
         this.clientMenuPanel = new ClientMenuPanel(this);
@@ -38,14 +41,14 @@ public class InvView extends JFrame implements Observer {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
-
+    // Making loginPanel default visible and hiding others
     private void visiblePanels() {
         this.getLoginPanel().setVisible(true);
         this.getClientMenuPanel().setVisible(false);
         this.getInventoryPanel().setVisible(false);
         this.getCreateOrderPanel().setVisible(false);
     }
-
+    // Creation of controllers
     public void createControllers(InvController controller) {
         getLoginPanel().getLogIn().addActionListener(controller);
         getClientMenuPanel().getViewCurrentInventory().addActionListener(controller);
@@ -56,7 +59,7 @@ public class InvView extends JFrame implements Observer {
         getCreateOrderPanel().getBackButton().addActionListener(controller);
         getCreateOrderPanel().getPlaceOrder().addActionListener(controller);
     }
-
+    // Updates Observer checks if user login is correct
     @Override
     public void update(Observable o, Object arg) {
 
