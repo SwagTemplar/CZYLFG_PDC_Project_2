@@ -29,19 +29,52 @@ public class InvDBManager {
         }
         if (!checkTableExist("INVENTORYSTOCK")) {
             databaseUpdate("CREATE TABLE INVENTORYSTOCK(FRUITID INT, FRUITNAME VARCHAR(40), FRUITQUANTITY INT)");
+            intialStock();
         }
         if (!checkTableExist("ORDERS")) {
             databaseUpdate("CREATE TABLE ORDERS(ORDERID INT, FRUITID INT, QUANTITYORDERED INT, USERID INT)");
+            initialOrders();
         }
 
     }
 
     //The initial login details
     private void initialLogins() {
-        databaseUpdate("INSERT INTO LOGINDETAILS VALUES(1, 'kisoon', 'leaf')");
-        databaseUpdate("INSERT INTO LOGINDETAILS VALUES(2, 'connor', 'conzey')");
-        databaseUpdate("INSERT INTO LOGINDETAILS VALUES(3, 'john', '123')");
-        databaseUpdate("INSERT INTO LOGINDETAILS VALUES(4, 'bob', '123')");
+        databaseUpdate("INSERT INTO LOGINDETAILS VALUES(1, 'kisoon', 'leaf')");     //Admin Logins
+        databaseUpdate("INSERT INTO LOGINDETAILS VALUES(2, 'connor', 'conzey')");   //Admin Logins
+        databaseUpdate("INSERT INTO LOGINDETAILS VALUES(3, 'john', '123')");        //Client Logins
+        databaseUpdate("INSERT INTO LOGINDETAILS VALUES(4, 'bob', '123')");         //Client Logins
+    }
+    
+    /**
+     * Create initial stock in the tables
+     * 
+     *   Fruit IDs
+     *   1 - Gala Apple
+     *   2 - Granny Smith Apple
+     *   3 - Banana
+     *   4 - Mango
+     *   5 - Watermelon
+     *   6 - Pineapple
+     *   7 - Pear    
+     *   8 - Grape
+     */
+    private void intialStock() {
+        databaseUpdate("INSERT INTO INVENTORYSTOCK VALUES(1, 'Gala Apple', 1000)");
+        databaseUpdate("INSERT INTO INVENTORYSTOCK VALUES(2, 'Granny Smith Apple', 1000)");
+        databaseUpdate("INSERT INTO INVENTORYSTOCK VALUES(3, 'Banana', 1000)");
+        databaseUpdate("INSERT INTO INVENTORYSTOCK VALUES(4, 'Mango', 1000)");
+        databaseUpdate("INSERT INTO INVENTORYSTOCK VALUES(5, 'Watermelon', 1000)");
+        databaseUpdate("INSERT INTO INVENTORYSTOCK VALUES(6, 'Pineapple', 1000)");
+        databaseUpdate("INSERT INTO INVENTORYSTOCK VALUES(7, 'Pear', 1000)");
+        databaseUpdate("INSERT INTO INVENTORYSTOCK VALUES(8, 'Grape', 1000)");
+    }
+    
+    //Create initial orders
+    private void initialOrders() {
+        databaseUpdate("INSERT INTO ORDERS VALUES(1, 1, 150, 3)");
+        databaseUpdate("INSERT INTO ORDERS VALUES(2, 8, 230, 4)");
+        databaseUpdate("INSERT INTO ORDERS VALUES(3, 5, 50, 3)");
     }
 
     //Check if the tables exist
@@ -173,7 +206,6 @@ public class InvDBManager {
         } catch (SQLException ex) {
             System.out.println("Error searching for Inventory");
         }
-
         return inv;
     }
 }
