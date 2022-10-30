@@ -15,4 +15,9 @@ public class OrderList {
         this.orderArr = new ArrayList<>();
     }
     
+    public void add(Order order)
+    {
+        this.orderArr.add(order);
+    }
+    
 }
