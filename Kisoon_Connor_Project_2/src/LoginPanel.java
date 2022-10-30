@@ -15,6 +15,7 @@ public class LoginPanel extends JPanel {
     private InvView invview;
     // Components that will be used in the panel
     private JButton logIn;
+    private JButton quit;
     private JTextField usernameInput;
     private JTextField passwordInput;
     private JLabel username;
@@ -88,6 +89,16 @@ public class LoginPanel extends JPanel {
         passLoginDetails.setText("Client login: Password = 123");
         this.add(this.passLoginDetails, BorderLayout.SOUTH);
         
+        // adds a quit button so user may exit the application without pressing X button on window,
+        // however user must logout to quit
+        quit = new JButton();
+        gBC.anchor = GridBagConstraints.CENTER;
+        gBC.gridx = 1;
+        gBC.gridy = 1;
+        this.add(quit, gBC);
+        getQuit().setText("Quit");
+        getQuit().setVisible(true);
+        
     }
 
     /**
@@ -130,6 +141,13 @@ public class LoginPanel extends JPanel {
      */
     public void setMessage(String message) {
         this.message.setText(message);
+    }
+
+    /**
+     * @return the quit
+     */
+    public JButton getQuit() {
+        return quit;
     }
 
 }
