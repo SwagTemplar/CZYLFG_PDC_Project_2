@@ -147,9 +147,33 @@ public class InvDBManager {
             }
 
         } catch (SQLException ex) {
-            System.out.println("Searching Error");
+            System.out.println("Error Searching for Orders");
         }
 
         return ol;
+    }
+    
+    //Get Inventory Stock Levels
+    
+    public Inventory retrieveInventory() {
+        Inventory inv = new Inventory();
+
+        try {
+            ResultSet invSearch = databaseQuery("SELECT * FROM INVENTORYSTOCK");
+            if (invSearch != null) {
+                while (invSearch.next()) {
+                    int fruitID = invSearch.getInt("FRUITID");
+                    String fruitName = invSearch.getString("FRUITNAME");
+                    int quantity = invSearch.getInt("FRUITQUANTITY");
+                    
+                    Item item = new Item(fruitID, fruitName, quantity);
+                    inv.add(item);
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error searching for Inventory");
+        }
+
+        return inv;
     }
 }
