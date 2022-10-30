@@ -22,5 +22,12 @@ public class InvModel extends Observable{
         this.setChanged();
         this.notifyObservers(this.user);
     }
+    
+    public void viewInventory(){
+        
+        
+        this.setChanged();
+        this.notifyObservers(this.user);
+    }
 
 }

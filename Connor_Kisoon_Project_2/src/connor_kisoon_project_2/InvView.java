@@ -24,12 +24,12 @@ public class InvView extends JFrame implements Observer {
 
     private JPanel viewerPanel = new JPanel(new GridBagLayout());
     private JPanel loginPanel = new JPanel(new GridBagLayout());
-    private JButton vCuInv = new JButton("View current inventory");
-    private JButton crOrd = new JButton("Create new order");
-    private JButton vCuOrd = new JButton("View current orders");
     private JButton logOut = new JButton("Logout");
-    private JTextArea fileView = new JTextArea();
+    public JButton vCuInv = new JButton("View current inventory");
+    public JButton crOrd = new JButton("Create new order");
+    public JButton vCuOrd = new JButton("View current orders");
     private JButton logIn = new JButton("Login");
+    private JTextArea fileView = new JTextArea();
     public JTextField usernameInput = new JTextField(20);
     public JTextField passwordInput = new JTextField(20);
     private JLabel username = new JLabel("Username: ");
@@ -80,6 +80,7 @@ public class InvView extends JFrame implements Observer {
     }
 
     public void Viewer() {
+
         gBC.insets = new Insets(10, 10, 10, 10);
         gBC.gridx = 0;
         gBC.gridy = 1;
@@ -96,21 +97,37 @@ public class InvView extends JFrame implements Observer {
 
         this.getContentPane().removeAll();
         this.add(this.message, BorderLayout.SOUTH);
-        this.add(new JScrollPane(fileView));
-        this.add(viewerPanel, BorderLayout.EAST);
         viewerPanel.setVisible(true);
         this.add(viewerPanel);
         this.revalidate();
         this.repaint();
     }
 
+    public void InventoryView() {
+        JButton backButton = new JButton("Back");
+        JPanel inventoryView = new JPanel();
+        JScrollPane textViewScroll = new JScrollPane(fileView);
+        inventoryView.add(textViewScroll);
+        inventoryView.add(backButton);
+
+//        this.add(new JScrollPane(fileView));
+//        this.add(viewerPanel, BorderLayout.EAST);
+    }
+
+    public void Currentorders() {
+
+    }
+
     void addActionListener(ActionListener listener) {
         this.logIn.addActionListener(listener);
+        this.vCuInv.addActionListener(listener);
+        this.crOrd.addActionListener(listener);
+        this.vCuOrd.addActionListener(listener);
     }
 
     @Override
-    public void update(Observable o, Object arg) {       
-        
+    public void update(Observable o, Object arg) {
+
         User user = (User) arg;
 
         if (!user.loginFlag) {
@@ -118,20 +135,21 @@ public class InvView extends JFrame implements Observer {
             this.passwordInput.setText("");
             this.message.setText("Invalid username or password.");
         } else if (user.loginFlag) {
-            if(user.isAdmin)
-            {
+            if (user.isAdmin) {
                 User adUser = new AdminUser();
                 adUser.loginFlag = user.loginFlag;
-                adUser.userID = user.userID; 
+                adUser.userID = user.userID;
                 adUser.isAdmin = user.isAdmin;
-            }else{
+                this.message.setText("Admin login successful");
+            } else {
                 User clientUser = new ClientUser();
                 clientUser.loginFlag = user.loginFlag;
-                clientUser.userID = user.userID;        
-                
+                clientUser.userID = user.userID;
+                this.message.setText("Client login successful");
+
                 this.Viewer();
             }
-            
+
         }
     }
 }

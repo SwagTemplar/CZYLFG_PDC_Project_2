@@ -1,6 +1,5 @@
 package connor_kisoon_project_2;
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -26,6 +25,9 @@ public class InvController implements ActionListener {
                 String username = this.InvView.usernameInput.getText();
                 String password = this.InvView.passwordInput.getText();
                 this.InvModel.validateUser(username, password);
+                break;
+            case "View current inventory":
+                this.InvModel.viewInventory();
                 break;
         }
     }
