@@ -6,15 +6,18 @@ import java.awt.event.ActionListener;
  * @author Kisoon Park 18008173 & Connor Stewart 17982915
  */
 public class InvController implements ActionListener {
+
     // Variables
     public InvView InvView;
     public InvModel InvModel;
+
     // Constructor
     public InvController(InvView InvView, InvModel InvModel) {
         this.InvView = InvView;
         this.InvModel = InvModel;
         this.InvView.createControllers(this);
     }
+
     // Handles ActionEvents through switch case
     public void actionPerformed(ActionEvent e) {
         String check = e.getActionCommand();
@@ -23,7 +26,7 @@ public class InvController implements ActionListener {
                 String username = this.InvView.getLoginPanel().getUsernameInput();
                 String password = this.InvView.getLoginPanel().getPasswordInput();
                 this.InvModel.validateUser(username, password);
-                if(InvModel.user.loginFlag == true && InvModel.user.isAdmin == false){
+                if (InvModel.user.loginFlag == true && InvModel.user.isAdmin == false) {
                     InvView.getClientMenuPanel().setVisible(true);
                     InvView.getLoginPanel().setVisible(false);
                 }
@@ -37,7 +40,7 @@ public class InvController implements ActionListener {
             case "Logout": // checks for logout button
                 HandleLogoutButton();
                 break;
-            case"Place order": // checks for Place order button
+            case "Place order": // checks for Place order button
                 HandlePlaceOrder();
                 break;
             case "Create order": // checks for Create order button
@@ -45,9 +48,14 @@ public class InvController implements ActionListener {
                 break;
             case "View current orders":
                 HandleViewOrders();
-                
+                break;
+            case "Quit":
+                HandleQuit();
+                break;
+
         }
     }
+
     // Button events - False hides the page and True makes the page visible then 
     // when updateObs is called it updated the page.
     private void HandleViewCurrentInventoryButton() {
@@ -69,14 +77,14 @@ public class InvController implements ActionListener {
         this.InvView.getLoginPanel().setVisible(true);
         InvModel.updateObs();
     }
-    
-    private void HandleCreateOrder(){
+
+    private void HandleCreateOrder() {
         this.InvView.getClientMenuPanel().setVisible(false);
         this.InvView.getCreateOrderPanel().setVisible(true);
         InvModel.updateObs();
     }
-    
-    private void HandlePlaceOrder(){
+
+    private void HandlePlaceOrder() {
         InvModel.updateObs();
     }
 
@@ -84,5 +92,9 @@ public class InvController implements ActionListener {
         this.InvView.getClientMenuPanel().setVisible(false);
         this.InvView.getViewOrdersPanel().setVisible(true);
         InvModel.updateObs();
+    }
+
+    private void HandleQuit() {
+        System.exit(0);
     }
 }
