@@ -27,7 +27,6 @@ public class InvDBManager {
         if (!checkTableExist("LOGINDETAILS")) {
             databaseUpdate("CREATE TABLE LOGINDETAILS(USERID INT, USERNAME VARCHAR(30), PASSWORD VARCHAR(30))");
             initialLogins();
-
         }
         if (!checkTableExist("INVENTORYSTOCK")) {
             databaseUpdate("CREATE TABLE INVENTORYSTOCK(FRUITID INT, FRUITNAME VARCHAR(40), FRUITQUANTITY INT)");
@@ -114,13 +113,4 @@ public class InvDBManager {
 
         return user;
     }
-//    public User checkLogin(String username, String password){
-//         User user = new User();
-//         
-//         user.loginFlag = true;
-//         
-//         return user;
-//    }
-    
-    
 }
