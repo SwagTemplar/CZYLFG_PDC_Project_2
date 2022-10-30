@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 /**
  *
- * @author kisoo
+ * @author Kisoon Park 18008173 & Connor Stewart
  */
 public class InvDBManager {
 
@@ -27,7 +27,6 @@ public class InvDBManager {
         if (!checkTableExist("LOGINDETAILS")) {
             databaseUpdate("CREATE TABLE LOGINDETAILS(USERID INT, USERNAME VARCHAR(30), PASSWORD VARCHAR(30))");
             initialLogins();
-
         }
         if (!checkTableExist("INVENTORYSTOCK")) {
             databaseUpdate("CREATE TABLE INVENTORYSTOCK(FRUITID INT, FRUITNAME VARCHAR(40), FRUITQUANTITY INT)");
@@ -114,13 +113,10 @@ public class InvDBManager {
 
         return user;
     }
-//    public User checkLogin(String username, String password){
-//         User user = new User();
-//         
-//         user.loginFlag = true;
-//         
-//         return user;
-//    }
     
-    
+    //Updates the orders table according to the inputted order
+    public void updateOrderTable(Order order){
+        databaseUpdate("INSERT INTO ORDERS VALUES("+order.getOrderID()+", "+order.getfruitID()+", "
+                        +order.getorderQuant()+", "+order.getuserID()+")");
+    }
 }
