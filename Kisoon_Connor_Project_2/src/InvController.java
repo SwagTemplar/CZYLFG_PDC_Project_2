@@ -42,6 +42,9 @@ public class InvController implements ActionListener {
                 break;
             case "Create order": // checks for Create order button
                 HandleCreateOrder();
+                break;
+            case "View current orders":
+                HandleViewOrders();
                 
         }
     }
@@ -73,6 +76,12 @@ public class InvController implements ActionListener {
     }
     
     private void HandlePlaceOrder(){
+        InvModel.updateObs();
+    }
+
+    private void HandleViewOrders() {
+        this.InvView.getClientMenuPanel().setVisible(false);
+        this.InvView.getViewOrdersPanel().setVisible(true);
         InvModel.updateObs();
     }
 }

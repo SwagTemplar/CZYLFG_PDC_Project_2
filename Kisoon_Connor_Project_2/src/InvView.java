@@ -15,6 +15,7 @@ public class InvView extends JFrame implements Observer {
     private ClientMenuPanel clientMenuPanel;
     private InventoryPanel inventoryPanel;
     private CreateOrderPanel createOrderPanel;
+    private ViewOrdersPanel viewOrdersPanel;
     
     // Getting user screen size
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -34,10 +35,12 @@ public class InvView extends JFrame implements Observer {
         this.clientMenuPanel = new ClientMenuPanel(this);
         this.inventoryPanel = new InventoryPanel(this);
         this.createOrderPanel = new CreateOrderPanel(this);
+        this.viewOrdersPanel = new ViewOrdersPanel(this);
         this.add(getLoginPanel());
         this.add(getClientMenuPanel());
         this.add(getInventoryPanel());
         this.add(getCreateOrderPanel());
+        this.add(getViewOrdersPanel());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
@@ -47,6 +50,7 @@ public class InvView extends JFrame implements Observer {
         this.getClientMenuPanel().setVisible(false);
         this.getInventoryPanel().setVisible(false);
         this.getCreateOrderPanel().setVisible(false);
+        this.getViewOrdersPanel().setVisible(false);
     }
     // Creation of controllers
     public void createControllers(InvController controller) {
@@ -58,6 +62,7 @@ public class InvView extends JFrame implements Observer {
         getInventoryPanel().getBackButton().addActionListener(controller);
         getCreateOrderPanel().getBackButton().addActionListener(controller);
         getCreateOrderPanel().getPlaceOrder().addActionListener(controller);
+        getViewOrdersPanel().getBackButton().addActionListener(controller);
     }
     // Updates Observer checks if user login is correct
     @Override
@@ -102,5 +107,12 @@ public class InvView extends JFrame implements Observer {
      */
     public CreateOrderPanel getCreateOrderPanel() {
         return createOrderPanel;
+    }
+
+    /**
+     * @return the viewOrdersPanel
+     */
+    public ViewOrdersPanel getViewOrdersPanel() {
+        return viewOrdersPanel;
     }
 }

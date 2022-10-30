@@ -49,7 +49,7 @@ class ClientMenuPanel extends JPanel {
         this.add(createOrder, gBC);
         // adds button
         viewCurrentOrder = new JButton();
-        viewCurrentOrder.setText("view current orders");
+        viewCurrentOrder.setText("View current orders");
         viewCurrentOrder.setVisible(true);
         gBC.anchor = GridBagConstraints.CENTER;
         gBC.gridx = 0;
