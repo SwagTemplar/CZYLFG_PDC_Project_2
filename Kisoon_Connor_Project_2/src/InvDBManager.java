@@ -1,5 +1,4 @@
 
-
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
@@ -45,19 +44,19 @@ public class InvDBManager {
         databaseUpdate("INSERT INTO LOGINDETAILS VALUES(3, 'john', '123')");        //Client Logins
         databaseUpdate("INSERT INTO LOGINDETAILS VALUES(4, 'bob', '123')");         //Client Logins
     }
-    
+
     /**
      * Create initial stock in the tables
-     * 
-     *   Fruit IDs
-     *   1 - Gala Apple
-     *   2 - Granny Smith Apple
-     *   3 - Banana
-     *   4 - Mango
-     *   5 - Watermelon
-     *   6 - Pineapple
-     *   7 - Pear    
-     *   8 - Grape
+     *
+     * Fruit IDs 
+     * 1 - Gala Apple 
+     * 2 - Granny Smith Apple 
+     * 3 - Banana 
+     * 4 - Mango 
+     * 5 - Watermelon 
+     * 6 - Pineapple 
+     * 7 - Pear 
+     * 8 - Grape
      */
     private void intialStock() {
         databaseUpdate("INSERT INTO INVENTORYSTOCK VALUES(1, 'Gala Apple', 1000)");
@@ -69,12 +68,33 @@ public class InvDBManager {
         databaseUpdate("INSERT INTO INVENTORYSTOCK VALUES(7, 'Pear', 1000)");
         databaseUpdate("INSERT INTO INVENTORYSTOCK VALUES(8, 'Grape', 1000)");
     }
-    
+
     //Create initial orders
     private void initialOrders() {
         databaseUpdate("INSERT INTO ORDERS VALUES(1, 1, 150, 3)");
         databaseUpdate("INSERT INTO ORDERS VALUES(2, 8, 230, 4)");
         databaseUpdate("INSERT INTO ORDERS VALUES(3, 5, 50, 3)");
+    }
+
+    private int getNextOrderID() {
+        int id = -1;
+
+        try {
+            ResultSet idSearch = databaseQuery("SELECT ORDERID FROM ORDERS ORDER BY ORDERID DESC LIMIT 1");
+
+            if (idSearch != null && idSearch.next()) {
+
+                id = idSearch.getInt("ORDERID");
+
+            } else {
+                System.out.println("No orderID found");
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Search error");
+        }
+
+        return id + 1;
     }
 
     //Check if the tables exist
@@ -158,7 +178,14 @@ public class InvDBManager {
     //Updates the orders table according to the inputted order
     public void updateOrderTable(Order order) {
         databaseUpdate("INSERT INTO ORDERS VALUES(" + order.getOrderID() + ", " + order.getfruitID() + ", "
-                + order.getorderQuant() + ", " + order.getuserID() + ")");
+                + order.getOrderQuant() + ", " + order.getUserID() + ")");
+    }
+    
+    //Update the orders table given the orderlist
+    public void updateOrders(OrderList ol){
+        for (Order o : ol.orderArr) {
+            databaseUpdate("INSERT INTO ORDERS VALUES(" +getNextOrderID()+", "+o.getfruitID()+", "+o.getOrderQuant()+", "+o.getUserID()+")");
+        }
     }
 
     //Get the orders of a particular user
@@ -185,9 +212,8 @@ public class InvDBManager {
 
         return ol;
     }
-    
+
     //Get Inventory Stock Levels
-    
     public Inventory retrieveInventory() {
         Inventory inv = new Inventory();
 
@@ -198,7 +224,7 @@ public class InvDBManager {
                     int fruitID = invSearch.getInt("FRUITID");
                     String fruitName = invSearch.getString("FRUITNAME");
                     int quantity = invSearch.getInt("FRUITQUANTITY");
-                    
+
                     Item item = new Item(fruitID, fruitName, quantity);
                     inv.add(item);
                 }
@@ -207,5 +233,11 @@ public class InvDBManager {
             System.out.println("Error searching for Inventory");
         }
         return inv;
+    }
+
+    public void updateInventory(Inventory inventory) {
+        for (Item i : inventory.itemArr) {
+            databaseUpdate("UPDATE INVENTORYSTOCK SET FRUITQUANTITY = " + i.getQuantityInStock() + "WHERE FRUITID =" + i.getItemID());
+        }
     }
 }
