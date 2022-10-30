@@ -109,29 +109,19 @@ public class InvView extends JFrame implements Observer {
     }
 
     @Override
-    public void update(Observable o, Object arg) {       
-        
-        User user = (User) arg;
+    public void update(Observable o, Object arg) {
 
-        if (!user.loginFlag) {
+        InvModel model = (InvModel) arg;
+
+        if (!model.user.loginFlag) {
             this.usernameInput.setText("");
             this.passwordInput.setText("");
             this.message.setText("Invalid username or password.");
-        } else if (user.loginFlag) {
-            if(user.isAdmin)
-            {
-                User adUser = new AdminUser();
-                adUser.loginFlag = user.loginFlag;
-                adUser.userID = user.userID; 
-                adUser.isAdmin = user.isAdmin;
-            }else{
-                User clientUser = new ClientUser();
-                clientUser.loginFlag = user.loginFlag;
-                clientUser.userID = user.userID;        
-                
+        } else if (model.user.loginFlag) {
+            if (!model.user.isAdmin) {
+                model.getClient().setOrderList(model.clientOrders());
                 this.Viewer();
             }
-            
         }
     }
 }
