@@ -19,7 +19,7 @@ public class InvModel extends Observable{
     public void validateUser(String username, String password) {
         
         user = db.checkLogin(username, password);
-        
+        this.setChanged();
         this.notifyObservers(this.user);
     }
 

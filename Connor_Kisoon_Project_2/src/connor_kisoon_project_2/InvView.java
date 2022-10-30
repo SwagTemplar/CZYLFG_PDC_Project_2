@@ -1,6 +1,5 @@
 package connor_kisoon_project_2;
 
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -21,7 +20,7 @@ import javax.swing.JTextField;
 /*
  * @author Connor Stewart 17982915
  */
-public class InvView extends JFrame implements Observer{
+public class InvView extends JFrame implements Observer {
 
     private JPanel viewerPanel = new JPanel(new GridBagLayout());
     private JPanel loginPanel = new JPanel(new GridBagLayout());
@@ -35,6 +34,8 @@ public class InvView extends JFrame implements Observer{
     public JTextField passwordInput = new JTextField(20);
     private JLabel username = new JLabel("Username: ");
     private JLabel password = new JLabel("Password: ");
+    public JLabel message = new JLabel("Please Login to continue", JLabel.CENTER);
+    public GridBagConstraints gBC = new GridBagConstraints();
 
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -45,7 +46,6 @@ public class InvView extends JFrame implements Observer{
         this.setSize(userScreenWidth, userScreenHeight);
         this.setLocationRelativeTo(null);
 
-        GridBagConstraints gBC = new GridBagConstraints();
         gBC.insets = new Insets(10, 10, 10, 10);
 
         gBC.anchor = GridBagConstraints.CENTER;
@@ -73,13 +73,13 @@ public class InvView extends JFrame implements Observer{
         gBC.gridy = 0;
         this.loginPanel.add(logIn, gBC);
 
+        this.add(this.message, BorderLayout.SOUTH);
+
         this.add(loginPanel);
         this.setVisible(true);
     }
 
     public void Viewer() {
-
-        GridBagConstraints gBC = new GridBagConstraints();
         gBC.insets = new Insets(10, 10, 10, 10);
         gBC.gridx = 0;
         gBC.gridy = 1;
@@ -95,6 +95,7 @@ public class InvView extends JFrame implements Observer{
         this.viewerPanel.add(logOut, gBC);
 
         this.getContentPane().removeAll();
+        this.add(this.message, BorderLayout.SOUTH);
         this.add(new JScrollPane(fileView));
         this.add(viewerPanel, BorderLayout.EAST);
         viewerPanel.setVisible(true);
@@ -110,9 +111,12 @@ public class InvView extends JFrame implements Observer{
     @Override
     public void update(Observable o, Object arg) {
         User user = (User) arg;
-        
-        if(user.loginFlag == true)
-        {
+
+        if (!user.loginFlag) {
+            this.usernameInput.setText("");
+            this.passwordInput.setText("");
+            this.message.setText("Invalid username or password.");
+        } else if (user.loginFlag == true) {
             this.Viewer();
         }
     }
