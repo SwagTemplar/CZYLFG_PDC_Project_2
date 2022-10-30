@@ -42,9 +42,6 @@ public class InvModel extends Observable{
                 cUser.loginFlag = user.loginFlag;
                 cUser.userID = user.userID;    
             }
-        
-        this.setChanged();
-        this.notifyObservers(this);
     }
     
     public OrderList clientOrders()
@@ -52,11 +49,9 @@ public class InvModel extends Observable{
         return db.retrieveOrders(cUser.userID);
     }
     
-    public void viewInventory(){
-        
-        
+    public void updateObs(){        
         this.setChanged();
-        this.notifyObservers(this.user);
+        this.notifyObservers(this);
     }
 
 }
