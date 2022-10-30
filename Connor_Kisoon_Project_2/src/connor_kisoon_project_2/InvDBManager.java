@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 /**
  *
- * @author kisoo
+ * @author Kisoon Park 18008173 & Connor Stewart
  */
 public class InvDBManager {
 
@@ -112,5 +112,11 @@ public class InvDBManager {
         }
 
         return user;
+    }
+    
+    //Updates the orders table according to the inputted order
+    public void updateOrderTable(Order order){
+        databaseUpdate("INSERT INTO ORDERS VALUES("+order.getOrderID()+", "+order.getfruitID()+", "
+                        +order.getorderQuant()+", "+order.getuserID()+")");
     }
 }
