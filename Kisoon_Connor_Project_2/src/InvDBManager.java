@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 /**
  *
- * @author Kisoon Park 18008173 & Connor Stewart
+ * @author Kisoon Park 18008173 & Connor Stewart 17982915
  */
 public class InvDBManager {
 

@@ -10,7 +10,7 @@ import javax.swing.JTextField;
 
 
 /*
- * @author Connor Stewart 17982915
+ * @author Kisoon Park 18008173 & Connor Stewart 17982915
  */
 
 class CreateOrderPanel extends JPanel{

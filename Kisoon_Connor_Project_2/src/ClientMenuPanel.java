@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /*
- * @author Connor Stewart 17982915
+ * @author Kisoon Park 18008173 & Connor Stewart 17982915
  */
 class ClientMenuPanel extends JPanel {
 

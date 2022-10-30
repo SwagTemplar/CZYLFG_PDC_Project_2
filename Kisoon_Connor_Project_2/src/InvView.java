@@ -6,7 +6,7 @@ import java.util.Observer;
 import javax.swing.JFrame;
 
 /*
- * @author Connor Stewart 17982915
+ * @author Kisoon Park 18008173 & Connor Stewart 17982915
  */
 public class InvView extends JFrame implements Observer {
 

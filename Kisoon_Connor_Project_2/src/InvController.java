@@ -3,7 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /*
- * @author Connor Stewart 17982915
+ * @author Kisoon Park 18008173 & Connor Stewart 17982915
  */
 public class InvController implements ActionListener {
 
