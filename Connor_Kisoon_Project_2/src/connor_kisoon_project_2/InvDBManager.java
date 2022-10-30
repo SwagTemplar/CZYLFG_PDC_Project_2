@@ -87,7 +87,7 @@ public class InvDBManager {
 
     //Checks if the login details of the user exist.
     public User checkLogin(String username, String password) {
-        User user = new User();
+        User user = null;
 
         try {
             ResultSet loginSearch = databaseQuery("SELECT * FROM LOGINDETAILS WHERE USERNAME = '" + username + "'");
@@ -95,6 +95,16 @@ public class InvDBManager {
             if (loginSearch != null) {
                 while (loginSearch.next()) {
                     String pw = loginSearch.getString("PASSWORD");
+                    int id = loginSearch.getInt("USERID");
+                    
+                    //See if it is a client or an admin when logging in.
+                    if(id == 1 || id == 2)
+                    {
+                        user = new AdminUser();
+                        user.isAdmin = true;
+                    }else{
+                        user = new ClientUser();
+                    }
 
                     if (password.compareTo(pw) == 0) {
                         user.loginFlag = true;
