@@ -9,18 +9,47 @@ import java.util.Observable;
 public class InvModel extends Observable{
 
     private InvDBManager db;
-    private User user;
+    public User user;
+    private ClientUser cUser;
+    private AdminUser adUser;
 
     public InvModel(){
         db = new InvDBManager();
+    }
+    
+    public ClientUser getClient()
+    {
+        return this.cUser;
+    }
+    
+    public AdminUser getAdmin()    
+    {
+        return this.adUser;
     }
     
     
     public void validateUser(String username, String password) {
         
         user = db.checkLogin(username, password);
+        if(user.isAdmin)
+            {
+                adUser = new AdminUser();
+                adUser.loginFlag = user.loginFlag;
+                adUser.userID = user.userID; 
+                adUser.isAdmin = user.isAdmin;
+            }else{
+                cUser = new ClientUser();
+                cUser.loginFlag = user.loginFlag;
+                cUser.userID = user.userID;    
+            }
+        
         this.setChanged();
-        this.notifyObservers(this.user);
+        this.notifyObservers(this);
+    }
+    
+    public OrderList clientOrders()
+    {
+        return db.retrieveOrders(cUser.userID);
     }
 
 }
