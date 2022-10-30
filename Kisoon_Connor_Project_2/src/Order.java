@@ -5,6 +5,7 @@
  * @author Kisoon Park 18008173 & Connor Stewart 17982915
  */
 public class Order {
+    //Variables
     private int orderID;
     private int fruitID;
     private int orderQuant;
@@ -16,7 +17,7 @@ public class Order {
         this.orderQuant = orderQuant;
         this.userID = userID;
     }
-    
+    // Getters
     public int getOrderID()
     {
         return this.orderID;
