@@ -25,11 +25,11 @@ public class Order {
     {
         return this.fruitID;
     }
-    public int getorderQuant()
+    public int getOrderQuant()
     {
         return this.orderQuant;
     }
-    public int getuserID()
+    public int getUserID()
     {
         return this.userID;
     }
