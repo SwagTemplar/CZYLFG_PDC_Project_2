@@ -6,21 +6,20 @@ import java.awt.event.ActionListener;
  * @author Kisoon Park 18008173 & Connor Stewart 17982915
  */
 public class InvController implements ActionListener {
-
+    // Variables
     public InvView InvView;
     public InvModel InvModel;
-
+    // Constructor
     public InvController(InvView InvView, InvModel InvModel) {
         this.InvView = InvView;
         this.InvModel = InvModel;
         this.InvView.createControllers(this);
-
     }
-
+    // Handles ActionEvents through switch case
     public void actionPerformed(ActionEvent e) {
         String check = e.getActionCommand();
         switch (check) {
-            case "Login":
+            case "Login":// checks for login button
                 String username = this.InvView.getLoginPanel().getUsernameInput();
                 String password = this.InvView.getLoginPanel().getPasswordInput();
                 this.InvModel.validateUser(username, password);
@@ -29,24 +28,25 @@ public class InvController implements ActionListener {
                     InvView.getLoginPanel().setVisible(false);
                 }
                 break;
-            case "View current inventory":
+            case "View current inventory": // checks for View current inventory button
                 HandleViewCurrentInventoryButton();
                 break;
-            case "Back":
+            case "Back": // checks for Back button
                 HandleBackButton();
                 break;
-            case "Logout":
+            case "Logout": // checks for logout button
                 HandleLogoutButton();
                 break;
-            case"Place order":
+            case"Place order": // checks for Place order button
                 HandlePlaceOrder();
                 break;
-            case "Create order":
+            case "Create order": // checks for Create order button
                 HandleCreateOrder();
                 
         }
     }
-
+    // Button events - False hides the page and True makes the page visible then 
+    // when updateObs is called it updated the page.
     private void HandleViewCurrentInventoryButton() {
         this.InvView.getClientMenuPanel().setVisible(false);
         this.InvView.getInventoryPanel().setVisible(true);
