@@ -8,7 +8,8 @@ public class User {
     
     //Checks login
     boolean loginFlag = false;
-    
+    //Checks user Authority
+    boolean isAdmin = false;
     //User ID
     int userID;
     
