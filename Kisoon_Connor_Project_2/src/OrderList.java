@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class OrderList {
     
-    private ArrayList<Order> orderArr;
+    public ArrayList<Order> orderArr;
     
     public OrderList()
     {
