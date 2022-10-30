@@ -13,6 +13,10 @@ public class ClientUser extends User{
         this.orderList = new OrderList();
     }
     
+    public void setOrderList(OrderList ol){
+        this.orderList = ol;
+    }
+    
     public OrderList getOrderList(){
         return this.orderList;
     }
