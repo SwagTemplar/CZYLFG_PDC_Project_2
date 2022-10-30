@@ -106,6 +106,9 @@ public class InvView extends JFrame implements Observer {
 
     void addActionListener(ActionListener listener) {
         this.logIn.addActionListener(listener);
+        this.vCuInv.addActionListener(listener);
+        this.crOrd.addActionListener(listener);
+        this.vCuOrd.addActionListener(listener);
     }
 
     @Override

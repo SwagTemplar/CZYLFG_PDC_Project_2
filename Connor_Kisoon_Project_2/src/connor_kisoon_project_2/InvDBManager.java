@@ -1,6 +1,5 @@
 package connor_kisoon_project_2;
 
-
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
@@ -41,6 +40,8 @@ public class InvDBManager {
     private void initialLogins() {
         databaseUpdate("INSERT INTO LOGINDETAILS VALUES(1, 'kisoon', 'leaf')");
         databaseUpdate("INSERT INTO LOGINDETAILS VALUES(2, 'connor', 'conzey')");
+        databaseUpdate("INSERT INTO LOGINDETAILS VALUES(3, 'john', '123')");
+        databaseUpdate("INSERT INTO LOGINDETAILS VALUES(4, 'bob', '123')");
     }
 
     //Check if the tables exist
@@ -87,7 +88,7 @@ public class InvDBManager {
 
     //Checks if the login details of the user exist.
     public User checkLogin(String username, String password) {
-        User user = null;
+        User user = new User();
 
         try {
             ResultSet loginSearch = databaseQuery("SELECT * FROM LOGINDETAILS WHERE USERNAME = '" + username + "'");
@@ -96,14 +97,11 @@ public class InvDBManager {
                 while (loginSearch.next()) {
                     String pw = loginSearch.getString("PASSWORD");
                     int id = loginSearch.getInt("USERID");
-                    
+
                     //See if it is a client or an admin when logging in.
-                    if(id == 1 || id == 2)
-                    {
-                        user = new AdminUser();
+                    if (id == 1 || id == 2) {
+
                         user.isAdmin = true;
-                    }else{
-                        user = new ClientUser();
                     }
 
                     if (password.compareTo(pw) == 0) {
@@ -123,38 +121,35 @@ public class InvDBManager {
 
         return user;
     }
-    
+
     //Updates the orders table according to the inputted order
-    public void updateOrderTable(Order order){
-        databaseUpdate("INSERT INTO ORDERS VALUES("+order.getOrderID()+", "+order.getfruitID()+", "
-                        +order.getorderQuant()+", "+order.getuserID()+")");
+    public void updateOrderTable(Order order) {
+        databaseUpdate("INSERT INTO ORDERS VALUES(" + order.getOrderID() + ", " + order.getfruitID() + ", "
+                + order.getorderQuant() + ", " + order.getuserID() + ")");
     }
-    
-    
+
     //Get the orders of a particular user
-    public OrderList retrieveOrders(int userID){
+    public OrderList retrieveOrders(int userID) {
         OrderList ol = new OrderList();
-        
-        try{
+
+        try {
             ResultSet orderSearch = databaseQuery("SELECT * FROM ORDERS WHERE USERID = '" + userID + "'");
-            if(orderSearch != null)
-            {
-                while(orderSearch.next())
-                {
+            if (orderSearch != null) {
+                while (orderSearch.next()) {
                     int orderID = orderSearch.getInt("ORDERID");
                     int fruitID = orderSearch.getInt("FRUITID");
                     int quantity = orderSearch.getInt("QUANTITYORDERED");
                     Order od = new Order(orderID, fruitID, quantity, userID);
                     ol.add(od);
                 }
-            }else{
+            } else {
                 System.out.println("No orders");
             }
-            
-        } catch (SQLException ex){
+
+        } catch (SQLException ex) {
             System.out.println("Searching Error");
         }
-        
+
         return ol;
     }
 }
